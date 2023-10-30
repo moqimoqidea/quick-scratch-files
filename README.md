@@ -23,6 +23,10 @@ icon from [free icon: folder_temporary_icon](https://www.iconfinder.com/icons/68
 
 ## Release Notes
 
+### 0.0.5
+
+Fix change log link wrong.
+
 ### 0.0.4
 
 Add icon.

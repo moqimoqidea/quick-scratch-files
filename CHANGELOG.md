@@ -1,3 +1,3 @@
 # Change Log
 
-See README.md Release Notes section.
+See [Release Notes](https://github.com/moqimoqidea/quick-scratch-files?tab=readme-ov-file#release-notes) section.

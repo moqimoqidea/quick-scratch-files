@@ -2,7 +2,7 @@
   "name": "quick-scratch-files",
   "displayName": "quick-scratch-files",
   "description": "quick-scratch-files",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.83.0"
   },
