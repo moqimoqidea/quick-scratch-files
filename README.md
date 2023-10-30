@@ -21,7 +21,7 @@ None.
 
 ### 0.0.2
 
-Just simple scratch files, enjoy.
+Fix version description error, add jetbrains scratch files link.
 
 ### 0.0.1
 
