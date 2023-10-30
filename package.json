@@ -85,5 +85,6 @@
   "repository": {
     "type": "https",
     "url": "https://github.com/moqimoqidea/vscode-scratch-files"
-  }
+  },
+  "publisher": "moqimoqidea"
 }
