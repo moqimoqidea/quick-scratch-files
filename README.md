@@ -19,6 +19,10 @@ None.
 
 ## Release Notes
 
+### 0.0.3
+
+Fix repo in package.json wrong.
+
 ### 0.0.2
 
 Fix version description error, add jetbrains scratch files link.
