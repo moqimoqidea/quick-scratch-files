@@ -52,7 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(createFileCommand);
 }
 
-// 创建文件并在创建时输出日志
+// 创建文件并在创建成功后打开文件
 function createFile(fileType: string) {
   const config = vscode.workspace.getConfiguration("temporaryFolder");
   const folderPath = config.get<string>("folderPath");
@@ -69,13 +69,14 @@ function createFile(fileType: string) {
     if (err) {
       vscode.window.showErrorMessage("Failed to create file.");
     } else {
-      vscode.window.showInformationMessage("File created successfully!");
-
-      // 输出日志消息
-      const outputChannel =
-        vscode.window.createOutputChannel("Temporary Folder");
-      outputChannel.appendLine(`New file created: ${fileName}`);
-      outputChannel.show();
+      // 打开新创建的文件
+      vscode.workspace.openTextDocument(filePath).then((doc) => {
+        vscode.window.showTextDocument(doc).then((editor) => {
+          // 将光标定位到文件的第一行首个位置
+          const position = new vscode.Position(0, 0);
+          editor.selection = new vscode.Selection(position, position);
+        });
+      });
     }
   });
 }
