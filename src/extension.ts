@@ -3,73 +3,81 @@ import * as fs from "fs";
 import * as path from "path";
 
 export function activate(context: vscode.ExtensionContext) {
-  let config = vscode.workspace.getConfiguration("temporaryFolder");
-
-  // 设置存储文件夹路径的配置选项
-  let folderPath = config.get<string>("folderPath");
-  if (!folderPath) {
-    vscode.window.showInformationMessage(
-      "Please select a folder for Temporary Folder extension."
-    );
-    vscode.commands.executeCommand("temporaryFolder.setFolder");
-  }
-
-  // 注册设置文件夹命令
+  // 注册设置临时文件夹的命令
   let setFolderCommand = vscode.commands.registerCommand(
     "temporaryFolder.setFolder",
-    async () => {
-      const folderUri = await vscode.window.showOpenDialog({
-        canSelectFolders: true,
-        canSelectFiles: false,
-      });
-      if (folderUri && folderUri.length > 0) {
-        config.update(
-          "folderPath",
-          folderUri[0].fsPath,
-          vscode.ConfigurationTarget.Global
-        );
-        vscode.window.showInformationMessage(
-          `Temporary Folder will save files in ${folderUri[0].fsPath}`
-        );
-      }
+    () => {
+      vscode.window
+        .showOpenDialog({
+          canSelectFolders: true,
+          canSelectFiles: false,
+          canSelectMany: false,
+          openLabel: "Set Temporary Folder",
+        })
+        .then((folderUri) => {
+          if (folderUri && folderUri[0]) {
+            vscode.workspace
+              .getConfiguration()
+              .update(
+                "temporaryFolder.folderPath",
+                folderUri[0].fsPath,
+                vscode.ConfigurationTarget.Global
+              );
+            vscode.window.showInformationMessage(
+              "Temporary folder set successfully!"
+            );
+          }
+        });
     }
   );
-  context.subscriptions.push(setFolderCommand);
 
-  // 注册创建文件命令
+  // 注册创建文件的命令
   let createFileCommand = vscode.commands.registerCommand(
     "temporaryFolder.createFile",
     async () => {
-      folderPath = config.get<string>("folderPath");
-      if (!folderPath) {
-        vscode.window.showErrorMessage("Please set a folder path in settings.");
-        return;
-      }
-
       const fileType = await vscode.window.showQuickPick(
         ["txt", "md", "py", "java"],
-        { placeHolder: "Select a file type" }
+        {
+          placeHolder: "Select file type",
+        }
       );
-      if (!fileType) {
-        return;
-      }
 
-      const fileName = `temp_${new Date().getTime()}.${fileType}`;
-      const filePath = path.join(folderPath, fileName);
-      fs.writeFileSync(filePath, "");
-
-      const openFile = await vscode.window.showInformationMessage(
-        "File created! Do you want to open it?",
-        "Yes",
-        "No"
-      );
-      if (openFile === "Yes") {
-        const document = await vscode.workspace.openTextDocument(filePath);
-        await vscode.window.showTextDocument(document);
+      if (fileType) {
+        createFile(fileType);
       }
     }
   );
+
+  context.subscriptions.push(setFolderCommand);
   context.subscriptions.push(createFileCommand);
+}
+
+// 创建文件并在创建时输出日志
+function createFile(fileType: string) {
+  const config = vscode.workspace.getConfiguration("temporaryFolder");
+  const folderPath = config.get<string>("folderPath");
+
+  if (!folderPath) {
+    vscode.window.showErrorMessage("Please set a folder path in settings.");
+    return;
+  }
+
+  const fileName = `temp_${Date.now()}.${fileType}`;
+  const filePath = path.join(folderPath, fileName);
+
+  fs.writeFile(filePath, "", (err) => {
+    if (err) {
+      vscode.window.showErrorMessage("Failed to create file.");
+    } else {
+      vscode.window.showInformationMessage("File created successfully!");
+
+      // 输出日志消息
+      const outputChannel =
+        vscode.window.createOutputChannel("Temporary Folder");
+      outputChannel.appendLine(`New file created: ${fileName}`);
+      outputChannel.show();
+    }
+  });
 }
 
 export function deactivate() {}

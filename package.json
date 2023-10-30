@@ -12,6 +12,16 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "properties": {
+        "temporaryFolder.folderPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the folder for temporary files",
+          "scope": "application"
+        }
+      }
+    },
     "commands": [
       {
         "command": "scratch-files.helloWorld",
