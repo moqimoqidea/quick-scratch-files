@@ -81,5 +81,9 @@
     "typescript": "^5.2.2",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/moqimoqidea/vscode-scratch-files"
   }
 }
