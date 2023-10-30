@@ -16,9 +16,35 @@
       {
         "command": "scratch-files.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "temporaryFolder.setFolder",
+        "title": "Set Temporary Folder"
+      },
+      {
+        "command": "temporaryFolder.createFile",
+        "title": "Create Temporary File"
       }
     ]
   },
+  "configuration": {
+    "type": "object",
+    "title": "Temporary Folder",
+    "properties": {
+      "temporaryFolder.folderPath": {
+        "type": "string",
+        "default": "",
+        "description": "Path to save temporary files"
+      }
+    }
+  },
+  "keybindings": [
+    {
+      "command": "temporaryFolder.createFile",
+      "key": "ctrl+shift+alt+n",
+      "when": "editorTextFocus"
+    }
+  ],
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
