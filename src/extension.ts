@@ -36,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
     "temporaryFolder.createFile",
     async () => {
       const fileType = await vscode.window.showQuickPick(
-        ["txt", "md", "py", "java"],
+        ["txt", "md", "py", "java", "json", "js", "ts", "html", "css"],
         {
           placeHolder: "Select file type",
         }
@@ -62,22 +62,36 @@ function createFile(fileType: string) {
     return;
   }
 
-  const fileName = `temp_${Date.now()}.${fileType}`;
-  const filePath = path.join(folderPath, fileName);
-
-  fs.writeFile(filePath, "", (err) => {
+  fs.readdir(folderPath, (err, files) => {
     if (err) {
-      vscode.window.showErrorMessage("Failed to create file.");
-    } else {
-      // 打开新创建的文件
-      vscode.workspace.openTextDocument(filePath).then((doc) => {
-        vscode.window.showTextDocument(doc).then((editor) => {
-          // 将光标定位到文件的第一行首个位置
-          const position = new vscode.Position(0, 0);
-          editor.selection = new vscode.Selection(position, position);
-        });
-      });
+      vscode.window.showErrorMessage("Failed to read the folder.");
+      return;
     }
+
+    const scratchFiles = files.filter(
+      (file) => file.startsWith("scratch_") && file.endsWith(`.${fileType}`)
+    );
+    const numbers = scratchFiles.map((file) => {
+      const match = file.match(/^scratch_(\d+)\.\w+$/);
+      return match ? parseInt(match[1]) : 0;
+    });
+
+    const maxNumber = numbers.length > 0 ? Math.max(...numbers) : 0;
+    const newFileName = `scratch_${maxNumber + 1}.${fileType}`;
+    const newFilePath = path.join(folderPath, newFileName);
+
+    fs.writeFile(newFilePath, "", (writeErr) => {
+      if (writeErr) {
+        vscode.window.showErrorMessage("Failed to create file.");
+      } else {
+        vscode.workspace.openTextDocument(newFilePath).then((doc) => {
+          vscode.window.showTextDocument(doc).then((editor) => {
+            const position = new vscode.Position(0, 0);
+            editor.selection = new vscode.Selection(position, position);
+          });
+        });
+      }
+    });
   });
 }
 
