@@ -2,7 +2,7 @@
 
 ## Features
 
-To create scratch files on pre defined locations.
+To create scratch files on pre defined locations, like [Jetbrains Scratch files](https://www.jetbrains.com/help/idea/scratches.html).
 
 ## Requirements
 
@@ -19,6 +19,10 @@ None.
 
 ## Release Notes
 
-### 1.0.0
+### 0.0.2
+
+Just simple scratch files, enjoy.
+
+### 0.0.1
 
 Just simple scratch files, enjoy.
