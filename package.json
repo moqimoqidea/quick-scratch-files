@@ -2,7 +2,7 @@
   "name": "quick-scratch-files",
   "displayName": "quick-scratch-files",
   "description": "quick-scratch-files",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -86,5 +86,6 @@
     "type": "https",
     "url": "https://github.com/moqimoqidea/quick-scratch-files"
   },
-  "publisher": "moqimoqidea"
+  "publisher": "moqimoqidea",
+  "icon": "src/images/icon.png"
 }

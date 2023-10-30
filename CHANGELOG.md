@@ -1,9 +1,3 @@
 # Change Log
 
-All notable changes to the "quick-scratch-files" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+See README.md Release Notes section.

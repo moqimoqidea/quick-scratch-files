@@ -17,7 +17,15 @@ None.
 
 None.
 
+## Icon
+
+icon from [free icon: folder_temporary_icon](https://www.iconfinder.com/icons/6875/folder_temporary_icon), thanks for **Alessandro Rei**.
+
 ## Release Notes
+
+### 0.0.4
+
+Add icon.
 
 ### 0.0.3
 
