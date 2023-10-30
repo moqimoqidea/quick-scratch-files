@@ -1,4 +1,4 @@
-# scratch-files README
+# quick-scratch-files README
 
 ## Features
 

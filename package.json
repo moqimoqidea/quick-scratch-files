@@ -1,7 +1,7 @@
 {
-  "name": "scratch-files",
-  "displayName": "scratch-files",
-  "description": "scratch-files",
+  "name": "quick-scratch-files",
+  "displayName": "quick-scratch-files",
+  "description": "quick-scratch-files",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.83.0"
@@ -24,7 +24,7 @@
     },
     "commands": [
       {
-        "command": "scratch-files.helloWorld",
+        "command": "quick-scratch-files.helloWorld",
         "title": "Hello World"
       },
       {
@@ -84,7 +84,7 @@
   },
   "repository": {
     "type": "https",
-    "url": "https://github.com/moqimoqidea/vscode-scratch-files"
+    "url": "https://github.com/moqimoqidea/vscode-quick-scratch-files"
   },
   "publisher": "moqimoqidea"
 }
