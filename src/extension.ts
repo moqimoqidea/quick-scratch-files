@@ -3,7 +3,6 @@ import * as fs from "fs";
 import * as path from "path";
 
 export function activate(context: vscode.ExtensionContext) {
-  // 注册设置临时文件夹的命令
   let setFolderCommand = vscode.commands.registerCommand(
     "temporaryFolder.setFolder",
     () => {
@@ -31,16 +30,12 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  // 注册创建文件的命令
   let createFileCommand = vscode.commands.registerCommand(
     "temporaryFolder.createFile",
     async () => {
-      const fileType = await vscode.window.showQuickPick(
-        ["txt", "md", "py", "java", "json", "js", "ts", "html", "css"],
-        {
-          placeHolder: "Select file type",
-        }
-      );
+      const fileType = await vscode.window.showInputBox({
+        placeHolder: "Enter file type",
+      });
 
       if (fileType) {
         createFile(fileType);
@@ -48,11 +43,9 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  context.subscriptions.push(setFolderCommand);
-  context.subscriptions.push(createFileCommand);
+  context.subscriptions.push(setFolderCommand, createFileCommand);
 }
 
-// 创建文件并在创建成功后打开文件
 function createFile(fileType: string) {
   const config = vscode.workspace.getConfiguration("temporaryFolder");
   const folderPath = config.get<string>("folderPath");

@@ -23,6 +23,10 @@ icon from [free icon: folder_temporary_icon](https://www.iconfinder.com/icons/68
 
 ## Release Notes
 
+### 0.0.6
+
+Logical update: Users can enter any custom suffix to create a temporary file.
+
 ### 0.0.5
 
 Fix change log link wrong.

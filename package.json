@@ -2,7 +2,7 @@
   "name": "quick-scratch-files",
   "displayName": "quick-scratch-files",
   "description": "quick-scratch-files",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -23,10 +23,6 @@
       }
     },
     "commands": [
-      {
-        "command": "quick-scratch-files.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "temporaryFolder.setFolder",
         "title": "Set Temporary Folder"
